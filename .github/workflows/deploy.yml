@@ -1,30 +1,36 @@
-name: deploy website to github pages
+# This workflow demonstrates Continuous Deployment (CD) to GitHub Pages.
 
+name: Deploy Static Website to GitHub Pages
+
+# Controls when the workflow should run.
 on:
   push:
     branches:
-      - main
+      - main # Only run when a push is made to the main branch
     paths:
-       -'index.html'
-# Sets permissions granted to the GITHUB_TOKEN for this workflow
-permissions:      
-  contents: read 
-  pages: write
-  id-token: write
+      - 'index.html' # CRITICAL: Only run if the index.html file has been modified in the push
 
+# Sets permissions granted to the GITHUB_TOKEN for this workflow.
+permissions:
+  contents: read # Required to checkout the code
+  pages: write   # Required to publish to GitHub Pages
+  id-token: write # Required for secure OIDC authentication
+
+# A workflow run is made up of one or more jobs.
 jobs:
- deploy:
-   runs-on: ubuntu-latest
-   name: Deploy to pages
+  # Job to deploy the static files
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Pages
 
-   steps:
-     - name: Checkout Repository
-       uses: actions/checkout@v4  # action  to clone repository content
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4 # Action to clone the repository content
 
-     - name: Setup Pages
-       uses: actions/configure-pages@v5 #action to setup github pages environment
+      - name: Setup Pages
+        uses: actions/configure-pages@v5 # Action to set up the GitHub Pages environment
 
-     # --- Build Step (Optional for simple static sites, but good practice) ---
+      # --- Build Step (Optional for simple static sites, but good practice) ---
       # For a basic index.html, the "build" is just copying the file. 
       # If you were using Jekyll or Hugo, this step would execute the build command.
       - name: Copy Files for Deployment (Simulated Build)
@@ -41,32 +47,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        uses: actions/deploy-pages@v4 # Action to finalize the deployment
