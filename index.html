@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Actions Deployment Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-10 rounded-xl shadow-2xl text-center max-w-lg w-full">
+        <h1 class="text-6xl font-extrabold text-indigo-700 mb-4 tracking-tight">
+            Hello, GitHub Actions! I am ceedz...
+        </h1>
+        <p class="text-xl text-gray-600 mb-6">
+            This page was deployed automatically via a **Continuous Deployment (CD)** pipeline defined in a GitHub Actions workflow.
+        </p>
+        <div class="text-sm text-gray-500 mt-8">
+            <p>Deployment Timestamp: <span id="timestamp">Loading...</span></p>
+            <p class="mt-1">Watch the workflow run in the 'Actions' tab of the repository!</p>
+        </div>
+    </div>
 
+    <script>
+        // Set a dynamic timestamp to show when the page was last "built" or viewed
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
