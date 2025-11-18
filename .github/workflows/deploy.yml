@@ -1,0 +1,72 @@
+name: deploy website to github pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+       -'index.html'
+# Sets permissions granted to the GITHUB_TOKEN for this workflow
+permissions:      
+  contents: read 
+  pages: write
+  id-token: write
+
+jobs:
+ deploy:
+   runs-on: ubuntu-latest
+   name: Deploy to pages
+
+   steps:
+     - name: Checkout Repository
+       uses: actions/checkout@v4  # action  to clone repository content
+
+     - name: Setup Pages
+       uses: actions/configure-pages@v5 #action to setup github pages environment
+
+     # --- Build Step (Optional for simple static sites, but good practice) ---
+      # For a basic index.html, the "build" is just copying the file. 
+      # If you were using Jekyll or Hugo, this step would execute the build command.
+      - name: Copy Files for Deployment (Simulated Build)
+        run: |
+          mkdir _site
+          cp index.html _site/index.html
+          cp -r assets/ _site/assets/ 2>/dev/null || : # Copy assets if they exist
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The path to the directory containing the finished HTML files.
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
